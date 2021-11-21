@@ -1,10 +1,10 @@
-package main.java.inheritance;
+package main.java.interfaces;
 
 public class Media extends Post {
 
     String title;
 
-    Media(String author, String date, String message, String messageType, int size, String title) {
+    Media(String author, String date, String message, MessageType messageType, int size, String title) {
         super(author, date, message, messageType, size);
         this.title = title;
     }

@@ -1,14 +1,14 @@
-package main.java.inheritance;
+package main.java.interfaces;
 
 public abstract class Post {
 
     private String author;
     private String date;
     private String message;
-    private String messageType;
+    private MessageType messageType;
     private int size;
 
-    Post(String author, String date, String message, String messageType, int size) {
+    Post(String author, String date, String message, MessageType messageType, int size) {
         this.author = author;
         this.date = date;
         this.message = message;
@@ -48,7 +48,7 @@ public abstract class Post {
     }
 
     public String getMessageType() {
-        return messageType;
+        return messageType.getValue();
     }
 
     public int getSize() {
