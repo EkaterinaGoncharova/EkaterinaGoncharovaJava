@@ -2,7 +2,7 @@ package main.java.interfaces;
 
 public class Text extends Post implements IPrintable {
 
-    String language;
+    private String language;
 
     Text(String author, String date, String message, MessageType messageType, String language) {
         super(author, date, message, messageType);

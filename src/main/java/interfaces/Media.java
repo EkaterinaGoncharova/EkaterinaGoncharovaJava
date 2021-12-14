@@ -2,8 +2,8 @@ package main.java.interfaces;
 
 public class Media extends Post {
 
-    String title;
-    int maxSize;
+    private String title;
+    private int maxSize;
 
     Media(String author, String date, String message, MessageType messageType, int maxSize, String title) {
         super(author, date, message, messageType);

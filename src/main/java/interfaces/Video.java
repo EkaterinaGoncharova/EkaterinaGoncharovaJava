@@ -2,7 +2,7 @@ package main.java.interfaces;
 
 public class Video extends Media implements IPlayable {
 
-    String videoType;
+    private String videoType;
 
     Video(String author, String date, String message, MessageType messageType, int size, String title, String videoType) {
         super(author, date, message, messageType, size, title);

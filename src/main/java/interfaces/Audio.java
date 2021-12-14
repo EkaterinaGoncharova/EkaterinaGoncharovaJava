@@ -2,7 +2,7 @@ package main.java.interfaces;
 
 public class Audio extends Media implements IPlayable {
 
-    String audioType;
+    private String audioType;
 
     Audio(String author, String date, String message, MessageType messageType, int size, String title, String audioType) {
         super(author, date, message, messageType, size, title);

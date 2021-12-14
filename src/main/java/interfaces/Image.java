@@ -2,7 +2,7 @@ package main.java.interfaces;
 
 public class Image extends Media implements IPrintable {
 
-    String imageType;
+    private String imageType;
 
     Image(String author, String date, String message, MessageType messageType, int size, String title, String imageType) {
         super(author, date, message, messageType, size, title);
