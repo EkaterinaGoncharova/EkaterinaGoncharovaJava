@@ -2,10 +2,9 @@ package main.java.exceptions;
 
 public class Dishwasher {
 
-    private int maxSize;
+    private final int maxSize;
     private int counter;
-    private boolean isRunning;
-    private boolean isUnloaded;
+    private DishwasherStatus status;
 
     Dishwasher(int maxSize) {
         if (maxSize <= 0) {
@@ -13,64 +12,61 @@ public class Dishwasher {
         }
         this.maxSize = maxSize;
         this.counter = 0;
-        this.isRunning = false;
-        this.isUnloaded = false;
+        this.status = DishwasherStatus.EMPTY;
     }
 
     /**
-     * Loads one dish to dishwasher
+     * Loads one dirty dish to dishwasher
      * @exception IllegalDishwasherStateException if dishwasher is running or unloaded
      * @exception DishwasherIsFullException if dishwasher is full
      */
     public void load() {
-        if(isRunning || isUnloaded) {
-            throw new IllegalDishwasherStateException("Cannot load if dishwasher is running or unloaded");
-        } else if(counter >= maxSize) {
-            throw new DishwasherIsFullException("Cannot load if dishwasher is full");
+        if(!(status == DishwasherStatus.EMPTY || status == DishwasherStatus.DIRTY)) {
+            throw new IllegalDishwasherStateException("Cannot load if dishwasher is running or clean dishes are not unloaded");
         }
+        if(counter >= maxSize) {
+            throw new DishwasherIsFullException(String.format("Cannot load more dishes. Max size is %d", maxSize));
+        }
+        status = DishwasherStatus.DIRTY;
         counter++;
-        System.out.println("Dishwasher is loaded");
+        System.out.println("One dirty dish is loaded");
     }
 
     /**
-     * Unloads all dishes
-     * @exception IllegalDishwasherStateException if dishwasher is running
-     */
-    public void unload() {
-        if(isRunning) {
-            throw new IllegalDishwasherStateException("Cannot unload if dishwasher is running");
-        }
-        isUnloaded = false;
-        counter = 0;
-        System.out.println("Dishwasher is unloaded");
-    }
-
-    /**
-     * Starts running
+     * Starts washing
      * @exception DishwasherIsEmptyException if dishwasher is empty
-     * @exception IllegalDishwasherStateException if dishwasher is running
      */
     public void start() {
-        if (counter == 0) {
-            throw new DishwasherIsEmptyException("Cannot run if dishwasher is empty");
-        } else if (isRunning) {
-            throw new IllegalDishwasherStateException("Cannot start if dishwasher is running");
+        if (status != DishwasherStatus.DIRTY) {
+            throw new DishwasherIsEmptyException("Cannot start if dishwasher is not loaded");
         }
-        isRunning = true;
+        status = DishwasherStatus.WASHING;
         System.out.println("Dishwasher is started");
     }
 
     /**
-     * Stops running
+     * Stops washing
      * @exception IllegalDishwasherStateException if dishwasher is stopped
      */
     public void stop() {
-        if(!isRunning) {
-            throw new IllegalDishwasherStateException("Cannot stop if dishwasher is stopped");
+        if(status != DishwasherStatus.WASHING) {
+            throw new IllegalDishwasherStateException("Cannot stop if dishwasher is not running");
         }
-        isRunning = false;
-        isUnloaded = true;
+        status = DishwasherStatus.STOPPED;
         System.out.println("Dishwasher is stopped");
+    }
+
+    /**
+     * Unloads all clean dishes
+     * @exception IllegalDishwasherStateException if dishwasher is running
+     */
+    public void unload() {
+        if(status != DishwasherStatus.STOPPED) {
+            throw new IllegalDishwasherStateException("Cannot unload if dishwasher is not stopped");
+        }
+        status = DishwasherStatus.EMPTY;
+        counter = 0;
+        System.out.println("All clean dishes are unloaded");
     }
 
 }
