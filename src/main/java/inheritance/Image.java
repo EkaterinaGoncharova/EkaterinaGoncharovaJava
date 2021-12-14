@@ -2,7 +2,7 @@ package main.java.inheritance;
 
 public class Image extends Media {
 
-    String imageType;
+    private String imageType;
 
     Image(String author, String date, String message, String messageType, int size, String title, String imageType) {
         super(author, date, message, messageType, size, title);

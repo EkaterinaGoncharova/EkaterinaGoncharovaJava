@@ -2,7 +2,7 @@ package main.java.inheritance;
 
 public class Text extends Post {
 
-    String language;
+    private String language;
 
     Text(String author, String date, String message, String messageType, String language) {
         super(author, date, message, messageType);

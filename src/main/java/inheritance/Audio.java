@@ -2,7 +2,7 @@ package main.java.inheritance;
 
 public class Audio extends Media {
 
-    String audioType;
+    private String audioType;
 
     Audio(String author, String date, String message, String messageType, int size, String title, String audioType) {
         super(author, date, message, messageType, size, title);
