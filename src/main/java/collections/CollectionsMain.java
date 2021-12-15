@@ -61,7 +61,7 @@ public class CollectionsMain {
     public static List<User> join(List<User> list1, List<User> list2) {
         List<User> list = new ArrayList<>();
         for (User user : list1) {
-            if(list2.contains(user)) {
+            if (list2.contains(user)) {
                 list.add(user);
             }
         }
@@ -71,7 +71,7 @@ public class CollectionsMain {
     public static Set<User> join(Set<User> set1, Set<User> set2) {
         Set<User> set = new HashSet<>();
         for (User user : set1) {
-            if(set2.contains(user)) {
+            if (set2.contains(user)) {
                 set.add(user);
             }
         }
